@@ -19,10 +19,10 @@ class Characters {
         switch self.classe {
         case .Archer:
             self.weapon = Arrow()
-            self.life = 20
+            self.life = 30
         case .Warriors:
             self.weapon = Axe()
-            self.life = 30
+            self.life = 20
         case .Knight:
             self.weapon = Sword()
             self.life = 25
@@ -70,6 +70,7 @@ class Characters {
             attacker.life += 0
         } else {
             attacker.life += 5
+            print("life + 5pts  - life point = \(attacker.life)")
         }
     }
     

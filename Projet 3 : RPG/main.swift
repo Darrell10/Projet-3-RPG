@@ -150,7 +150,7 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
     // Si le joueur 1 decide d'attaquer, il choisi une cible de l'équipe du joueur 2
     if choice == 1 {
         repeat {
-            print("Player 1: Choose who attack !")
+            print("Player 1: Choose the defender !")
             if teamP2[0].life <= 0 {
                 print("1.KO")
             } else {
@@ -161,7 +161,8 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
             } else {
                 print("2.\(teamP2[1].name)" + " - life : \(teamP2[1].life)")
             }
-            if teamP2[2].life <= 0 { print("3. KO")
+            if teamP2[2].life <= 0 {
+                print("3.KO")
             } else {
                 print("3.\(teamP2[2].name)" + " - life : \(teamP2[2].life)")
             }
@@ -243,17 +244,17 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
             repeat {
                 print("Player 2: Choose the Defender")
                 if teamP1[0].life <= 0 {
-                    print("1. KO")
+                    print("1.KO")
                 } else {
                     print("1.\(teamP1[0].name)" + " - life : \(teamP1[0].life)")
                 }
                 if teamP1[1].life <= 0 {
-                    print("2. KO")
+                    print("2.KO")
                 } else {
                     print("2.\(teamP1[1].name)" + " - life : \(teamP1[1].life)")
                 }
                 if teamP1[2].life <= 0 {
-                    print("3. KO")
+                    print("3.KO")
                     
                 } else {
                     print("3.\(teamP1[2].name)" + " - life : \(teamP1[2].life)")
