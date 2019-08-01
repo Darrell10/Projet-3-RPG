@@ -14,7 +14,7 @@ enum Classe {
 }
 
 func fighterChoice() {
-    print("1. Archer - Weapon: Arrow")
-    print("2. Warrior - Weapon: Axe")
-    print("3. Knight - Weapon: Sword")
+    print("1. Archer - Life point: 30 pts - Weapon: Arrow - Weapon Damage: 8")
+    print("2. Warrior - Life point: 20 pts - Weapon: Axe - Weapon Damage: 15")
+    print("3. Knight - Life point: 25 pts - Weapon: Sword - Weapon Damage: 10")
 }
