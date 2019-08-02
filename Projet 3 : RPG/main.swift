@@ -16,6 +16,12 @@ func input() -> Int {
     return Int(strData!)!
 }
 
+func actionFighter() {
+    print("what do you want to execute ?")
+    print("1. Attack")
+    print("2. Treat")
+}
+
 // Variables qui serviront à déterminer les choix des deux joueurs
 var choice: Int
 

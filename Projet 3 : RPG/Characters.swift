@@ -75,11 +75,8 @@ class Characters {
     }
     
     func desc() {
-        print("Name : " + self.name)
-        print("Life : \(self.life)")
-        print("Weapon : \(self.weapon.weaponName)")
-        print("Weapon Damage: \(self.weapon.weaponDamage)")
-        print()
+        print("Name : " + self.name + " - Life : \(self.life)")
+        print("Weapon : \(self.weapon.weaponName)" + " - Weapon Damage: \(self.weapon.weaponDamage)")
     }
 }
 
