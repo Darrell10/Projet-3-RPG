@@ -62,6 +62,7 @@ for i in 1...3 {
         let character3 = Characters(name: "Fighter 3", classe: draft1)
         teamP1.append(character3)
     }
+    // La fonction print vide ajoute un espace au texte la console
     print()
 }
 
@@ -100,7 +101,6 @@ for i in 1...3 {
 
 
 // Debut des combats, On joue tant que tous les personnages d'une équipe sont en vie
-
 var lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
 var lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
 while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
@@ -188,13 +188,18 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         }
         print()
         if attacker.life <= 0 {
+            // Si l'attaquant est KO il ne peut pas attaquer
             print("Attacker is KO, no Attack")
             print()
         } else {
+            // Sinon le combattant Attaque
             attacker.battle(versus: defender)
+            print()
         }
     } else {
+        // Sinon l'attaquant se soigne
         attacker.treat(attacker: attacker)
+        print()
     }
     print()
     
@@ -248,6 +253,7 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         
         if choice == 1 {
             repeat {
+                // Si le joueur 2 decide d'attaquer, il choisi une cible de l'équipe du joueur 1
                 print("Player 2: Choose the Defender")
                 if teamP1[0].life <= 0 {
                     print("1.KO")
@@ -280,13 +286,16 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
                 break
             }
             if attacker.life <= 0 {
+                // Si l'attaquant est KO il ne peut pas attaquer
                 print("Attacker is KO, no Attack")
                 print()
             } else {
+                 // Sinon le combattant Attaque
                 attacker.battle(versus: defender)
                 print()
             }
         } else {
+            // Sinon l'attaquant se soigne
             attacker.treat(attacker: attacker)
             print()
         }
@@ -295,7 +304,7 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
 
 
 // On annonce le vainqueur
-var winner: String
+let winner: String
 
 if lifeTeamP1 > 0 {
     winner = "Player 1"
@@ -309,11 +318,9 @@ print("Number of laps : \(numberOfLaps)")
 print()
 for personnage in teamP1 {
     print(personnage.desc())
-    print()
 }
 for personnage in teamP2 {
     print(personnage.desc())
-    print()
 }
 print("Game Over")
 

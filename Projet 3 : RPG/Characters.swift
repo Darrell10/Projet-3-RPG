@@ -8,6 +8,7 @@
 
 import Foundation
 class Characters {
+    // Attributs
     var name: String
     let classe: Classe
     var weapon: Weapon
@@ -41,6 +42,7 @@ class Characters {
         // Apparition aléatoire du coffre
         let number = Int(arc4random_uniform(9))
         if number <= 3 {
+            // Selection aléatoire de la nouvelle arme
             let armeNumber = Int(arc4random_uniform(2)+1)
             if armeNumber == 1 {
                 self.weapon = Sword ()
@@ -53,28 +55,34 @@ class Characters {
             print("New weapon get: \(self.weapon.weaponName)")
             print()
         }
+        // Le defenseur reçoit les dégâts
         defender.receveidDamage(weaponDamage: weapon.weaponDamage)
     }
     
     func receveidDamage(weaponDamage: Int) {
+        // Reception de dommage suite à une attaque
         life = life - weaponDamage
         if life < 0 {
+        // Si le personnage à des points de vie négatif, les points de vie restent à zero
             life = 0
         }
     }
     
     func treat (attacker: Characters) {
+        // Si l'attaquant est KO, il ne reçoit pas de point de vie
         if attacker.life <= 0 {
             print("Fighter is KO, no recovery point")
             print()
             attacker.life += 0
         } else {
+            // sinon l'attaquant reçoit 5 points de vie
             attacker.life += 5
             print("life + 5pts  - life point = \(attacker.life)")
         }
     }
     
     func desc() {
+        // Description du combattant
         print("Name : " + self.name + " - Life : \(self.life)")
         print("Weapon : \(self.weapon.weaponName)" + " - Weapon Damage: \(self.weapon.weaponDamage)")
     }
