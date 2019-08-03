@@ -5,9 +5,6 @@
 //  Created by Frederick Port on 01/08/2019.
 //  Copyright © 2019 French game factory. All rights reserved.
 //
-
-import Foundation
-
 import Foundation
 // Fonction permettant de demander à l'utilisateur d'entrer un nombre entier
 func input() -> Int {
@@ -65,7 +62,6 @@ for i in 1...3 {
     print()
 }
 
-
 // Selection de l'équipe du joueur 2
 for i in 1...3 {
     print("Player 2: select your fighter number \(i)")
@@ -97,7 +93,6 @@ for i in 1...3 {
     }
     print()
 }
-
 
 // Debut des combats, On joue tant que tous les personnages d'une équipe sont en vie
 var lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
@@ -301,7 +296,6 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
     }
 }
 
-
 // On annonce le vainqueur
 let winner: String
 
@@ -322,4 +316,3 @@ for personnage in teamP2 {
     print(personnage.desc())
 }
 print("Game Over")
-
