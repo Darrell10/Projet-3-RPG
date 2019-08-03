@@ -17,7 +17,8 @@ func input() -> Int {
 }
 
 func actionFighter() {
-    print("what do you want to execute ?")
+    // Fonction qui affiche les actions possible a éxécuter
+    print("what do you want to do ?")
     print("1. Attack")
     print("2. Treat")
 }
@@ -25,17 +26,15 @@ func actionFighter() {
 // Variables qui serviront à déterminer les choix des deux joueurs
 var choice: Int
 
-// initialisation du jeu, creation des 2 équipes
+// initialisation du jeu, creation des 2 équipes et de la variable numbersOfLaps
 var teamP1: [Characters] = []
-
 var teamP2: [Characters] = []
-
 var numberOfLaps: Int = 0
 
 // On demande quel type de personnage les joueurs veulent choisir dans leurs équipes
 // Selection du joueur 1
 for i in 1...3 {
-    print("Player 1 : select your fighter number \(i)")
+    print("Player 1: select your fighter number \(i)")
     repeat {
         fighterChoice()
         choice = input()
@@ -62,14 +61,14 @@ for i in 1...3 {
         let character3 = Characters(name: "Fighter 3", classe: draft1)
         teamP1.append(character3)
     }
-    // La fonction print vide ajoute un espace au texte la console
+    // La fonction print vide ajoute un espace au texte de la console
     print()
 }
 
 
 // Selection de l'équipe du joueur 2
 for i in 1...3 {
-    print("Player 2 : select your fighter number \(i)")
+    print("Player 2: select your fighter number \(i)")
     repeat {
         fighterChoice()
         choice = input()
@@ -203,7 +202,7 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
     }
     print()
     
-    // Cette condition permet de ne pas faire jouer le deuxième personnage s'il est mort
+    // Cette condition permet de ne pas faire jouer le deuxième personnage si tous ses personnages sont KO
     if lifeTeamP2 > 0 {
         // Tour du joueur 2
         repeat {

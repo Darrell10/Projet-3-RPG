@@ -39,16 +39,17 @@ class Characters {
     }
     
     func attack(defender: Characters) {
-        // Apparition aléatoire du coffre
+        // Generation d'un chiffre aléatoire entre 0 et 9
         let number = Int(arc4random_uniform(9))
+        // Si le chiffre généré est inférieur ou égale à 3, apparition du coffre magique
         if number <= 3 {
             // Selection aléatoire de la nouvelle arme
-            let armeNumber = Int(arc4random_uniform(2)+1)
-            if armeNumber == 1 {
+            let weaponNumber = Int(arc4random_uniform(2)+1)
+            if weaponNumber == 1 {
                 self.weapon = Sword ()
-            } else if armeNumber == 2 {
+            } else if weaponNumber == 2 {
                 self.weapon = Arrow ()
-            } else if armeNumber == 3 {
+            } else if weaponNumber == 3 {
                 self.weapon = Axe()
             }
             print("Appearance of a magic chest")
@@ -60,7 +61,7 @@ class Characters {
     }
     
     func receveidDamage(weaponDamage: Int) {
-        // Reception de dommage suite à une attaque
+        // Reception de dommages suite à une attaque
         life = life - weaponDamage
         if life < 0 {
         // Si le personnage à des points de vie négatif, les points de vie restent à zero
@@ -77,13 +78,13 @@ class Characters {
         } else {
             // sinon l'attaquant reçoit 5 points de vie
             attacker.life += 5
-            print("life + 5pts  - life point = \(attacker.life)")
+            print("life + 5pts  - life point: \(attacker.life)")
         }
     }
     
     func desc() {
         // Description du combattant
-        print("Name : " + self.name + " - Life : \(self.life)")
+        print("Name : " + self.name + " - Life: \(self.life)")
         print("Weapon : \(self.weapon.weaponName)" + " - Weapon Damage: \(self.weapon.weaponDamage)")
     }
 }
