@@ -19,3 +19,9 @@ func fighterChoice() {
     print("2. Warrior - Life point: 20 pts - Weapon: Axe - Weapon Damage: 15")
     print("3. Knight - Life point: 25 pts - Weapon: Sword - Weapon Damage: 10")
 }
+
+func fighterNoExist() {
+    print("this fighter do not exist !")
+    print()
+}
+

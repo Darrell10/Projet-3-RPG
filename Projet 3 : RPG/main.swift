@@ -8,8 +8,7 @@
 import Foundation
 // Function to ask the user to enter a Int number
 func input() -> Int {
-    let strData = readLine();
-    
+    let strData = readLine()
     return Int(strData!)!
 }
 
@@ -19,8 +18,6 @@ func actionFighter() {
     print("1. Attack")
     print("2. Treat")
 }
-
-
 
 // Variables that will be used to determine the players' choices
 var choice: Int
@@ -35,8 +32,10 @@ var numberOfLaps: Int = 0
 for i in 1...3 {
     print("Player 1: select your fighter number \(i)")
     repeat {
+        // Print charactere selection
         fighterChoice()
         choice = input()
+        // if choice is different of the charactere selection
         if choice != 1 && choice != 2 && choice != 3 {
             fighterNoExist()
         }
