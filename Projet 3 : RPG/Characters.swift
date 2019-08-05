@@ -8,7 +8,7 @@
 
 import Foundation
 class Characters {
-    // Attributs
+    // Property
     var name: String
     let classe: Classe
     var weapon: Weapon
@@ -33,17 +33,17 @@ class Characters {
     func battle(versus character: Characters) {
         attack(defender: character)
         desc()
-        // Mise a jour des vies des personnages
+        // Update of life team characters
         lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
         lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
     }
     
     func attack(defender: Characters) {
-        // Generation d'un chiffre aléatoire entre 0 et 9
+        // Generation of a random number between 0 and 9
         let number = Int(arc4random_uniform(9))
-        // Si le chiffre généré est inférieur ou égale à 3, apparition du coffre magique
+        // If the generated number is less than or equal to 3, appearance of the magic chest
         if number <= 3 {
-            // Selection aléatoire de la nouvelle arme
+            // Random selection of the new weapon
             let weaponNumber = Int(arc4random_uniform(2)+1)
             if weaponNumber == 1 {
                 self.weapon = Sword ()
@@ -56,37 +56,37 @@ class Characters {
             print("New weapon get: \(self.weapon.weaponName)")
             print()
         }
-        // Le defenseur reçoit les dégâts
+        // Defender received damaged
         defender.receveidDamage(weaponDamage: weapon.weaponDamage)
     }
     
     func receveidDamage(weaponDamage: Int) {
-        // Reception de dommages suite à une attaque
+        // Reception of damages following an attack
         life = life - weaponDamage
         if life < 0 {
-        // Si le personnage à des points de vie négatif, les points de vie restent à zero
+        // If the character has negative life points, the points remain at zero
             life = 0
         }
     }
     
     func treat (attacker: Characters) {
-        // Si l'attaquant est KO, il ne reçoit pas de point de vie
+        // if attacker is K.O, he can't treat
         if attacker.life <= 0 {
             print("Fighter is KO, no recovery point")
-            print()
-            attacker.life += 0
         } else {
-            // sinon l'attaquant reçoit 5 points de vie
+            // else he recovery 5 life points
             attacker.life += 5
-            print("life + 5pts  - life point: \(attacker.life)")
+            print("life + 5pts  - life points is now: \(attacker.life)")
         }
+        print()
     }
     
     func desc() {
-        // Description du combattant
+        // Fighter description
         print("Name : " + self.name + " - Life: \(self.life)")
         print("Weapon : \(self.weapon.weaponName)" + " - Weapon Damage: \(self.weapon.weaponDamage)")
     }
+    
 }
 
 
