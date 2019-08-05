@@ -6,7 +6,7 @@
 //  Copyright © 2019 French game factory. All rights reserved.
 //
 import Foundation
-// Fonction permettant de demander à l'utilisateur d'entrer un nombre entier
+// Function to ask the user to enter a Int number
 func input() -> Int {
     let strData = readLine();
     
@@ -14,27 +14,32 @@ func input() -> Int {
 }
 
 func actionFighter() {
-    // Fonction qui affiche les actions possible a éxécuter
+    // Function that displays the possible actions to execute
     print("what do you want to do ?")
     print("1. Attack")
     print("2. Treat")
 }
 
-// Variables qui serviront à déterminer les choix des deux joueurs
+
+
+// Variables that will be used to determine the players' choices
 var choice: Int
 
-// initialisation du jeu, creation des 2 équipes et de la variable numbersOfLaps
+// initialization of the game, creation of the 2 teams and the variable numbersOfLaps
 var teamP1: [Characters] = []
 var teamP2: [Characters] = []
 var numberOfLaps: Int = 0
 
-// On demande quel type de personnage les joueurs veulent choisir dans leurs équipes
-// Selection du joueur 1
+// We ask the players which characters they want to select in their team
+// Player 1 draft selection
 for i in 1...3 {
     print("Player 1: select your fighter number \(i)")
     repeat {
         fighterChoice()
         choice = input()
+        if choice != 1 && choice != 2 && choice != 3 {
+            fighterNoExist()
+        }
     } while choice != 1 && choice != 2 && choice != 3
     
     var draft1: Classe!
@@ -58,16 +63,19 @@ for i in 1...3 {
         let character3 = Characters(name: "Fighter 3", classe: draft1)
         teamP1.append(character3)
     }
-    // La fonction print vide ajoute un espace au texte de la console
+    // The empty print function adds space to the console text
     print()
 }
 
-// Selection de l'équipe du joueur 2
+// Player 2 Draft selection
 for i in 1...3 {
     print("Player 2: select your fighter number \(i)")
     repeat {
         fighterChoice()
         choice = input()
+        if choice != 1 && choice != 2 && choice != 3 {
+            fighterNoExist()
+        }
     } while choice != 1 && choice != 2 && choice != 3
     
     var draft2: Classe!
@@ -94,18 +102,20 @@ for i in 1...3 {
     print()
 }
 
-// Debut des combats, On joue tant que tous les personnages d'une équipe sont en vie
+// Battle Start, players play while one team is K.O
 var lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
 var lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
+
+
 while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
     var attacker: Characters!
     var defender: Characters!
     
-    // Tour du joueur 1
+    // Player 1 Lap
     repeat {
         numberOfLaps += 1
         print("Laps  \(numberOfLaps)")
-        // Joueur 1 choisi son attaquant
+        // Player 1 select a fighter
         print("Player 1: Choose your attacker")
         if teamP1[0].life <= 0 {
             print("1.KO")
@@ -127,7 +137,11 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         }
         print("Total Team life : \(lifeTeamP1)")
         choice = input()
-    } while choice != 1 && choice != 2 && choice != 3
+        if choice != 1 && choice != 2 && choice != 3 {
+            print("this fighter do not exist !")
+        }
+    } while choice != 1 && choice != 2 && choice != 3;
+    
     
     switch choice {
     case 1:
@@ -140,14 +154,14 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         break
     }
     print()
-    // Joueur 1 decide de l'action à faire
+    // Player 1 decides what to do
     repeat {
         actionFighter()
         choice = input()
         print()
         
     }while choice != 1 && choice != 2
-    // Si le joueur 1 decide d'attaquer, il choisi une cible de l'équipe du joueur 2
+    // If the player 1 decides to attack, he chooses a target of the team of the player 2
     if choice == 1 {
         repeat {
             print("Player 1: Choose the defender !")
@@ -168,6 +182,9 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
             }
             print("Total Team life : \(lifeTeamP2)")
             choice = input()
+            if choice != 1 && choice != 2 && choice != 3 {
+                fighterNoExist()
+            }
         } while choice != 1 && choice != 2 && choice != 3
         
         switch choice {
@@ -182,26 +199,26 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         }
         print()
         if attacker.life <= 0 {
-            // Si l'attaquant est KO il ne peut pas attaquer
+            // if attacker is K.O, he can't attack
             print("Attacker is KO, no Attack")
             print()
         } else {
-            // Sinon le combattant Attaque
+            // else the fighter attack
             attacker.battle(versus: defender)
             print()
         }
     } else {
-        // Sinon l'attaquant se soigne
+        // else the player 1 decides to treat
         attacker.treat(attacker: attacker)
         print()
     }
     print()
     
-    // Cette condition permet de ne pas faire jouer le deuxième personnage si tous ses personnages sont KO
+    // This condition allows not to play the player 2 if all his characters team are K.O
     if lifeTeamP2 > 0 {
-        // Tour du joueur 2
+        // Player 2 Lap
         repeat {
-            // Le joueur 2 choisi son attaquant
+            // Player 2 select a fighter
             print("Player 2: Choose your attacker")
             if teamP2[0].life <= 0 {
                 print("1.KO")
@@ -247,7 +264,7 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         
         if choice == 1 {
             repeat {
-                // Si le joueur 2 decide d'attaquer, il choisi une cible de l'équipe du joueur 1
+                // If the player 2 decides to attack, he chooses a target of the team of the player 1
                 print("Player 2: Choose the Defender")
                 if teamP1[0].life <= 0 {
                     print("1.KO")
@@ -267,6 +284,9 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
                 }
                 print("Total Team life : \(lifeTeamP1)")
                 choice = input()
+                if choice != 1 && choice != 2 && choice != 3 {
+                    fighterNoExist()
+                }
             } while choice != 1 && choice != 2 && choice != 3
             
             switch choice {
@@ -280,23 +300,23 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
                 break
             }
             if attacker.life <= 0 {
-                // Si l'attaquant est KO il ne peut pas attaquer
+                // if attacker is K.O, he can't attack
                 print("Attacker is KO, no Attack")
                 print()
             } else {
-                 // Sinon le combattant Attaque
+                // // else the fighter attack
                 attacker.battle(versus: defender)
                 print()
             }
         } else {
-            // Sinon l'attaquant se soigne
+            // else the player 1 decides to treat
             attacker.treat(attacker: attacker)
             print()
         }
     }
 }
 
-// On annonce le vainqueur
+// The winner is
 let winner: String
 
 if lifeTeamP1 > 0 {
@@ -305,7 +325,7 @@ if lifeTeamP1 > 0 {
     winner = "Player 2"
 }
 
-// On affiche le vainqueur
+// Winner is printing
 print("the Winner is " + winner + " !")
 print("Number of laps : \(numberOfLaps)")
 print()
@@ -315,4 +335,6 @@ for personnage in teamP1 {
 for personnage in teamP2 {
     print(personnage.desc())
 }
+
+// End of the game
 print("Game Over")
