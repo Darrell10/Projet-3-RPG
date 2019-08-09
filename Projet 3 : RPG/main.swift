@@ -6,10 +6,34 @@
 //  Copyright © 2019 French game factory. All rights reserved.
 //
 import Foundation
+
+
+// Variables that will be used to determine the players' choices
+var choice: Int
+// initialization of the game, creation of the 2 teams and the variable numbersOfLaps
+var teamP1: [Characters] = []
+var teamP2: [Characters] = []
+var lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
+var lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
+var numberOfLaps: Int = 0
+
 // Function to ask the user to enter a Int number
 func input() -> Int {
     let strData = readLine()
     return Int(strData!)!
+}
+
+func fighterChoice() {
+    // list of characters to draft
+    print("1. Archer - Life point: 30 pts - Weapon: Arrow - Weapon Damage: 8")
+    print("2. Warrior - Life point: 20 pts - Weapon: Axe - Weapon Damage: 15")
+    print("3. Knight - Life point: 25 pts - Weapon: Sword - Weapon Damage: 10")
+}
+
+func fighterNoExist() {
+    // Alert message when player select a wrong fighter
+    print("this fighter do not exist !")
+    print()
 }
 
 func actionFighter() {
@@ -19,13 +43,7 @@ func actionFighter() {
     print("2. Treat")
 }
 
-// Variables that will be used to determine the players' choices
-var choice: Int
-
-// initialization of the game, creation of the 2 teams and the variable numbersOfLaps
-var teamP1: [Characters] = []
-var teamP2: [Characters] = []
-var numberOfLaps: Int = 0
+// SelectFighter
 
 // We ask the players which characters they want to select in their team
 // Player 1 draft selection
@@ -101,11 +119,9 @@ for i in 1...3 {
     print()
 }
 
+// startGame
+
 // Battle Start, players play while one team is K.O
-var lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
-var lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
-
-
 while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
     var attacker: Characters!
     var defender: Characters!
@@ -141,7 +157,6 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         }
     } while choice != 1 && choice != 2 && choice != 3;
     
-    
     switch choice {
     case 1:
         attacker = teamP1[0]
@@ -158,9 +173,9 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         actionFighter()
         choice = input()
         print()
-        
-    }while choice != 1 && choice != 2
-    // If the player 1 decides to attack, he chooses a target of the team of the player 2
+    } while choice != 1 && choice != 2
+    
+    // If the player 1 decides to attack, he chooses a target of player 2 team's
     if choice == 1 {
         repeat {
             print("Player 1: Choose the defender !")
@@ -213,7 +228,7 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
     }
     print()
     
-    // This condition allows not to play the player 2 if all his characters team are K.O
+    // This condition not allows to play the player 2 if all his characters team are K.O
     if lifeTeamP2 > 0 {
         // Player 2 Lap
         repeat {
@@ -314,6 +329,8 @@ while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         }
     }
 }
+
+// DisplayWinner
 
 // The winner is
 let winner: String

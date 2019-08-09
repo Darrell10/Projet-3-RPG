@@ -9,7 +9,7 @@
 import Foundation
 class Characters {
     // Property
-    var name: String
+    let name: String
     let classe: Classe
     var weapon: Weapon
     var life: Int
@@ -17,6 +17,7 @@ class Characters {
     init(name: String, classe: Classe) {
         self.name = name
         self.classe = classe
+        
         switch self.classe {
         case .Archer:
             self.weapon = Arrow()
@@ -41,8 +42,8 @@ class Characters {
     func attack(defender: Characters) {
         // Generation of a random number between 0 and 9
         let number = Int(arc4random_uniform(9))
-        // If the generated number is less than or equal to 3, appearance of the magic chest
-        if number <= 3 {
+        // If the generated number is less than or equal to 2, appearance of the magic chest
+        if number <= 2 {
             // Random selection of the new weapon
             let weaponNumber = Int(arc4random_uniform(2)+1)
             if weaponNumber == 1 {

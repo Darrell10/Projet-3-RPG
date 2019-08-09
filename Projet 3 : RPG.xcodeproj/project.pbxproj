@@ -69,13 +69,13 @@
 		B6D76D2A22F30A8A00B2B979 /* Projet 3 : RPG */ = {
 			isa = PBXGroup;
 			children = (
-				B6D76D2B22F30A8A00B2B979 /* main.swift */,
 				B6D76D3222F30AA700B2B979 /* Weapon.swift */,
-				B6D76D3422F30AAD00B2B979 /* Characters.swift */,
-				B6D76D3622F30AB200B2B979 /* Sword.swift */,
-				B6D76D3822F30AB800B2B979 /* Arrow.swift */,
 				B6D76D3A22F30ABD00B2B979 /* Axe.swift */,
+				B6D76D3822F30AB800B2B979 /* Arrow.swift */,
+				B6D76D3622F30AB200B2B979 /* Sword.swift */,
+				B6D76D3422F30AAD00B2B979 /* Characters.swift */,
 				B6D76D3C22F30AC200B2B979 /* Classe.swift */,
+				B6D76D2B22F30A8A00B2B979 /* main.swift */,
 			);
 			path = "Projet 3 : RPG";
 			sourceTree = "<group>";
