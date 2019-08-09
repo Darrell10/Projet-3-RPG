@@ -9,7 +9,7 @@
 import Foundation
 class Weapon {
     
-    // Property
+    // Attribute
     var weaponName: String
     var weaponDamage: Int
     

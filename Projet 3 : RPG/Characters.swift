@@ -8,7 +8,7 @@
 
 import Foundation
 class Characters {
-    // Property
+    // Attribute
     let name: String
     let classe: Classe
     var weapon: Weapon
@@ -30,7 +30,7 @@ class Characters {
             self.life = 25
         }
     }
-    // Functions
+    // Method
     func battle(versus character: Characters) {
         attack(defender: character)
         desc()

@@ -5,18 +5,17 @@
 //  Created by Frederick Port on 09/08/2019.
 //  Copyright © 2019 French game factory. All rights reserved.
 //
-
 import Foundation
-// Variables that will be used to determine the players' choices
+// Attribut
 var choice: String = ""
-// initialization of the game, creation of the 2 teams and the variable numbersOfLaps
 var teamP1: [Characters] = []
 var teamP2: [Characters] = []
 var lifeTeamP1: Int = 0
 var lifeTeamP2: Int = 0
 var numberOfLaps: Int = 1
 
-// Function to ask the user to enter a String
+// Methods
+// Function that will be used to determine the players' choices
 func input() -> String {
     let strData = readLine()
     return String(strData!)
@@ -27,6 +26,11 @@ func fighterChoice() {
     print("1. Archer - Life point: 30 pts - Weapon: Arrow - Weapon Damage: 8")
     print("2. Warrior - Life point: 20 pts - Weapon: Axe - Weapon Damage: 15")
     print("3. Knight - Life point: 25 pts - Weapon: Sword - Weapon Damage: 10")
+    choice = input()
+    // if choice is different of the charactere selection
+    if choice != "1" && choice != "2" && choice != "3" {
+        fighterNoExist()
+    }
 }
 
 func fighterNoExist() {
@@ -35,10 +39,15 @@ func fighterNoExist() {
 }
 
 func actionFighter() {
-    // Function that displays the possible actions to execute
+    // Message that displays the possible actions to execute
     print("what do you want to do ?")
     print("1. Attack")
     print("2. Treat")
+    choice = input()
+    print()
+    if choice != "1" && choice != "2" {
+        actionNoExist()
+    }
 }
 
 func actionNoExist() {
@@ -47,18 +56,12 @@ func actionNoExist() {
 }
 
 func selectFighter() {
-    // We ask the players which characters they want to select in their team
     // Player 1 draft selection
     for i in 1...3 {
         print("Player 1: select your fighter number \(i)")
         repeat {
             // Print charactere selection
             fighterChoice()
-            choice = input()
-            // if choice is different of the charactere selection
-            if choice != "1" && choice != "2" && choice != "3" {
-                fighterNoExist()
-            }
         } while choice != "1" && choice != "2" && choice != "3"
         
         var draft1: Classe!
@@ -91,10 +94,6 @@ func selectFighter() {
         print("Player 2: select your fighter number \(i)")
         repeat {
             fighterChoice()
-            choice = input()
-            if choice != "1" && choice != "2" && choice != "3"{
-                fighterNoExist()
-            }
         } while choice != "1" && choice != "2" && choice != "3"
         
         var draft2: Classe!
@@ -124,7 +123,6 @@ func selectFighter() {
 }
 
 func startGame() {
-    // Battle Start, players play while one team is K.O
     while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         var attacker: Characters!
         var defender: Characters!
@@ -173,11 +171,6 @@ func startGame() {
         // Player 1 decides what to do
         repeat {
             actionFighter()
-            choice = input()
-            print()
-            if choice != "1" && choice != "2" {
-                actionNoExist()
-            }
         } while choice != "1" && choice != "2"
         
         // If the player 1 decides to attack, he chooses a target of player 2 team's
@@ -273,11 +266,6 @@ func startGame() {
             print()
             repeat {
                 actionFighter()
-                choice = input()
-                print()
-                if choice != "1" && choice != "2" {
-                    actionNoExist()
-                }
             }while choice != "1" && choice != "2"
             
             if choice == "1" {
@@ -351,13 +339,11 @@ func displayWinner(){
     print()
     for personnage in teamP1 {
         print(personnage.desc())
-        
     }
     for personnage in teamP2 {
         print(personnage.desc())
-        
     }
     // End of the game
     print("Game Over")
-    
 }
+
