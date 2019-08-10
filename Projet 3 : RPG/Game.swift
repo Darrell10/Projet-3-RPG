@@ -6,6 +6,7 @@
 //  Copyright © 2019 French game factory. All rights reserved.
 //
 import Foundation
+class Game {
 // Attribut
 var choice: String = ""
 var teamP1: [Characters] = []
@@ -13,6 +14,15 @@ var teamP2: [Characters] = []
 var lifeTeamP1: Int = 0
 var lifeTeamP2: Int = 0
 var numberOfLaps: Int = 1
+    
+    init(choice: String, teamP1: [Characters], teamP2: [Characters], lifeTeamP1: Int, lifeTeamP2: Int, numberOfLaps: Int){
+        self.choice = choice
+        self.teamP1 = teamP1
+        self.teamP2 = teamP2
+        self.lifeTeamP1 = lifeTeamP1
+        self.lifeTeamP2 = lifeTeamP2
+        self.numberOfLaps = numberOfLaps
+    }
 
 // Methods
 // Function that will be used to determine the players' choices
@@ -315,6 +325,9 @@ func startGame() {
             print()
         }
         // end of the laps
+        // Update of life team characters
+        lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
+        lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
         if lifeTeamP1 > 0 && lifeTeamP1 > 0 {
             numberOfLaps += 1
         }
@@ -342,4 +355,4 @@ func displayWinner(){
     // End of the game
     print("Game Over")
 }
-
+}

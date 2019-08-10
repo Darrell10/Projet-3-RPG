@@ -34,9 +34,6 @@ class Characters {
     func battle(versus character: Characters) {
         attack(defender: character)
         desc()
-        // Update of life team characters
-        lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
-        lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
     }
     
     func attack(defender: Characters) {
