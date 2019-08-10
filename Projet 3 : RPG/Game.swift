@@ -46,13 +46,9 @@ func actionFighter() {
     choice = input()
     print()
     if choice != "1" && choice != "2" {
-        actionNoExist()
+        // Alert message when player select a wrong action
+        print("this action do not exist !")
     }
-}
-
-func actionNoExist() {
-    // Alert message when player select a wrong action
-    print("this action do not exist !")
 }
 
 func selectFighter() {
