@@ -8,14 +8,14 @@
 import Foundation
 class Game {
 // Attribut
-var choice: String = ""
-var teamP1: [Characters] = []
-var teamP2: [Characters] = []
-var lifeTeamP1: Int = 0
-var lifeTeamP2: Int = 0
-var numberOfLaps: Int = 1
+var choice: String?
+var teamP1: [Characters]
+var teamP2: [Characters]
+var lifeTeamP1: Int
+var lifeTeamP2: Int
+var numberOfLaps: Int
     
-    init(choice: String, teamP1: [Characters], teamP2: [Characters], lifeTeamP1: Int, lifeTeamP2: Int, numberOfLaps: Int){
+    init(choice: String?, teamP1: [Characters], teamP2: [Characters], lifeTeamP1: Int, lifeTeamP2: Int, numberOfLaps: Int){
         self.choice = choice
         self.teamP1 = teamP1
         self.teamP2 = teamP2
