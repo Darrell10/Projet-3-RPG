@@ -14,19 +14,24 @@ var teamP2: [Characters]
 var lifeTeamP1: Int
 var lifeTeamP2: Int
 var numberOfLaps: Int
-    
-    init(choice: String?, teamP1: [Characters], teamP2: [Characters], lifeTeamP1: Int, lifeTeamP2: Int, numberOfLaps: Int){
+var player1Lap: Bool
+var player2Lap: Bool
+
+    init(choice: String?, teamP1: [Characters], teamP2: [Characters], lifeTeamP1: Int, lifeTeamP2: Int, numberOfLaps: Int, player1Lap: Bool, player2Lap: Bool){
         self.choice = choice
         self.teamP1 = teamP1
         self.teamP2 = teamP2
         self.lifeTeamP1 = lifeTeamP1
         self.lifeTeamP2 = lifeTeamP2
         self.numberOfLaps = numberOfLaps
+        self.player1Lap = player1Lap
+        self.player2Lap = player2Lap
     }
 
 // Methods
-// Function that will be used to determine the players' choices
+
 func input() -> String {
+    // Function that will be used to determine the players' choices
     let strData = readLine()
     return String(strData!)
 }
@@ -60,111 +65,119 @@ func actionFighter() {
         print("this action do not exist !")
     }
 }
+    
+    func draftSelection() {
+        for i in 1...3 {
+            if player1Lap == true {
+                print("Player 1: select your fighter number \(i)")
+            }
+            else {
+                print("Player 2: select your fighter number \(i + 3)")
+            }
+            repeat {
+                // Print charactere selection
+                fighterChoice()
+            } while choice != "1" && choice != "2" && choice != "3"
+            
+            var draft: Classe!
+            switch choice {
+            case "1":
+                draft = .Archer
+            case "2":
+                draft = .Warriors
+            case "3":
+                draft = .Knight
+            default:
+                break
+            }
+            if player1Lap == true {
+            if choice == "1" {
+                let character1 = Characters(name: "Fighter \(i)", classe: draft)
+                teamP1.append(character1)
+            } else if choice == "2" {
+                let character2 = Characters(name: "Fighter \(i)", classe: draft)
+                teamP1.append(character2)
+            } else if choice == "3" {
+                let character3 = Characters(name: "Fighter \(i)", classe: draft)
+                teamP1.append(character3)
+            }
+            // The empty print function adds space to the console text
+            print()
+            } else {
+                if choice == "1" {
+                    let character4 = Characters(name: "Fighter \(i + 3)", classe: draft)
+                    teamP2.append(character4)
+                } else if choice == "2" {
+                    let character5 = Characters(name: "Fighter \(i + 3)", classe: draft)
+                    teamP2.append(character5)
+                } else if choice == "3" {
+                    let character6 = Characters(name: "Fighter \(i + 3)", classe: draft)
+                    teamP2.append(character6)
+                }
+                print()
+            }
+        }
+        player1Lap = !player1Lap
+        player2Lap = !player2Lap
+    }
 
 func selectFighter() {
-    // Player 1 draft selection
-    for i in 1...3 {
-        print("Player 1: select your fighter number \(i)")
-        repeat {
-            // Print charactere selection
-            fighterChoice()
-        } while choice != "1" && choice != "2" && choice != "3"
-        
-        var draft1: Classe!
-        switch choice {
-        case "1":
-            draft1 = .Archer
-        case "2":
-            draft1 = .Warriors
-        case "3":
-            draft1 = .Knight
-        default:
-            break
-        }
-        if choice == "1" {
-            let character1 = Characters(name: "Fighter \(i)", classe: draft1)
-            teamP1.append(character1)
-        } else if choice == "2" {
-            let character2 = Characters(name: "Fighter \(i)", classe: draft1)
-            teamP1.append(character2)
-        } else if choice == "3" {
-            let character3 = Characters(name: "Fighter \(i)", classe: draft1)
-            teamP1.append(character3)
-        }
-        // The empty print function adds space to the console text
-        print()
-    }
-    lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
-    // Player 2 Draft selection
-    for i in 1...3 {
-        print("Player 2: select your fighter number \(i)")
-        repeat {
-            fighterChoice()
-        } while choice != "1" && choice != "2" && choice != "3"
-        
-        var draft2: Classe!
-        switch choice {
-        case "1":
-            draft2 = .Archer
-        case "2":
-            draft2 = .Warriors
-        case "3":
-            draft2 = .Knight
-        default:
-            break
-        }
-        if choice == "1" {
-            let character4 = Characters(name: "Fighter \(i + 3)", classe: draft2)
-            teamP2.append(character4)
-        } else if choice == "2" {
-            let character5 = Characters(name: "Fighter \(i + 3)", classe: draft2)
-            teamP2.append(character5)
-        } else if choice == "3" {
-            let character6 = Characters(name: "Fighter \(i + 3)", classe: draft2)
-            teamP2.append(character6)
-        }
-        print()
-    }
-    lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
+    // Player 1 Draft Selection
+    draftSelection()
+    // Player 2 Draft Selection
+    draftSelection()
+    // Update team Life
+    updateLifeTeam()
 }
-
-func startGame() {
-    while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
+    
+func updateLifeTeam() {
+        lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
+        lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
+    }
+    
+func lapGame() {
         var attacker: Characters!
         var defender: Characters!
-        var tourDuJoueur1: Bool = true
-        var tourDuJoueur2: Bool = false
-        var tourAttaquant: [Characters]
-        var tourDefenseur: [Characters]
-        func updateLifeTeam() {
-            lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
-            lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
-        }
+        var attackerLap: [Characters]
+        var defenderLap: [Characters]
         
-        // Player 1 Lap
         repeat {
+            if player1Lap == true {
+                attackerLap = teamP1
+                defenderLap = teamP2
+            } else {
+                attackerLap = teamP2
+                defenderLap = teamP1
+            }
             print("Laps  \(numberOfLaps)")
             // Player 1 select a fighter
-            print("Player 1: Choose your attacker")
-            if teamP1[0].life <= 0 {
+            if player1Lap == true {
+                print("Player 1: Choose your attacker")
+                print("Total Team life : \(lifeTeamP1)")
+            }
+            else {
+                print("Player 2: Choose your attacker")
+                print("Total Team life : \(lifeTeamP2)")
+                
+            }
+            if attackerLap[0].life <= 0 {
                 print("1.KO")
-                teamP1[0].weapon.weaponDamage = 0
+                attackerLap[0].weapon.weaponDamage = 0
             } else {
-                print("1.\(teamP1[0].name)" + " - life : \(teamP1[0].life)" + " - Weapon : \(teamP1[0].weapon.weaponName)")
+                print("1.\(attackerLap[0].name)" + " - life : \(attackerLap[0].life)" + " - Weapon : \(attackerLap[0].weapon.weaponName)")
             }
-            if teamP1[1].life <= 0 {
+            if attackerLap[1].life <= 0 {
                 print("2.KO")
-                teamP1[1].weapon.weaponDamage = 0
+                attackerLap[1].weapon.weaponDamage = 0
             } else {
-                print("2.\(teamP1[1].name)" + " - life : \(teamP1[1].life)" + " - Weapon : \(teamP1[1].weapon.weaponName)")
+                print("2.\(attackerLap[1].name)" + " - life : \(attackerLap[1].life)" + " - Weapon : \(attackerLap[1].weapon.weaponName)")
             }
-            if teamP1[2].life <= 0 {
+            if attackerLap[2].life <= 0 {
                 print("3.KO")
-                teamP1[2].weapon.weaponDamage = 0
+                attackerLap[2].weapon.weaponDamage = 0
             } else {
-                print("3.\(teamP1[2].name)" + " - life : \(teamP1[2].life)" + " - Weapon : \(teamP1[2].weapon.weaponName)")
+                print("3.\(attackerLap[2].name)" + " - life : \(attackerLap[2].life)" + " - Weapon : \(attackerLap[2].weapon.weaponName)")
             }
-            print("Total Team life : \(lifeTeamP1)")
             choice = input()
             if choice != "1" && choice != "2" && choice != "3" {
                 fighterNoExist()
@@ -173,40 +186,45 @@ func startGame() {
         
         switch choice {
         case "1":
-            attacker = teamP1[0]
+            attacker = attackerLap[0]
         case "2":
-            attacker = teamP1[1]
+            attacker = attackerLap[1]
         case "3":
-            attacker = teamP1[2]
+            attacker = attackerLap[2]
         default:
             break
         }
         print()
-        // Player 1 decides what to do
+        // Player decides what to do
         repeat {
             actionFighter()
         } while choice != "1" && choice != "2"
         
-        // If the player 1 decides to attack, he chooses a target of player 2 team's
+        // If the player decides to attack, he chooses a target of the opponent team
         if choice == "1" {
             repeat {
-                print("Player 1: Choose the defender !")
-                if teamP2[0].life <= 0 {
+                if player1Lap == true {
+                    print("Player 1: Choose the defender !")
+                }
+                else {
+                    print("Player 2: Choose the defender !")
+                }
+                if defenderLap[0].life <= 0 {
                     print("1.KO")
                 } else {
-                    print("1.\(teamP2[0].name)" + " - life : \(teamP2[0].life)")
+                    print("1.\(defenderLap[0].name)" + " - life : \(defenderLap[0].life)")
                 }
-                if teamP2[1].life <= 0 {
+                if defenderLap[1].life <= 0 {
                     print("2.KO")
                 } else {
-                    print("2.\(teamP2[1].name)" + " - life : \(teamP2[1].life)")
+                    print("2.\(defenderLap[1].name)" + " - life : \(defenderLap[1].life)")
                 }
-                if teamP2[2].life <= 0 {
+                if defenderLap[2].life <= 0 {
                     print("3.KO")
                 } else {
-                    print("3.\(teamP2[2].name)" + " - life : \(teamP2[2].life)")
+                    print("3.\(defenderLap[2].name)" + " - life : \(defenderLap[2].life)")
                 }
-                print("Total Team life : \(lifeTeamP2)")
+                // print("Total Team life : \(lifeTeamP2)")
                 choice = input()
                 if choice != "1" && choice != "2" && choice != "3" {
                     fighterNoExist()
@@ -215,11 +233,11 @@ func startGame() {
             
             switch choice {
             case "1":
-                defender = teamP2[0]
+                defender = defenderLap[0]
             case "2":
-                defender = teamP2[1]
+                defender = defenderLap[1]
             case "3":
-                defender = teamP2[2]
+                defender = defenderLap[2]
             default:
                 break
             }
@@ -236,105 +254,19 @@ func startGame() {
             attacker.treat(attacker: attacker)
         }
         updateLifeTeam()
+        player1Lap = !player1Lap
+        player2Lap = !player2Lap
         print()
-        
+    }
+
+func startGame() {
+    while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
+        lapGame()
         // This condition not allows to play the player 2 if all his characters team are K.O
         if lifeTeamP2 > 0 {
-            // Player 2 Lap
-            repeat {
-                // Player 2 select a fighter
-                print("Player 2: Choose your attacker")
-                if teamP2[0].life <= 0 {
-                    print("1.KO")
-                    teamP2[0].weapon.weaponDamage = 0
-                } else {
-                    print("1.\(teamP2[0].name)" + " - life : \(teamP2[0].life)" + " - Weapon : \(teamP2[0].weapon.weaponName)")
-                }
-                if teamP2[1].life <= 0 {
-                    print("2.KO")
-                    teamP2[1].weapon.weaponDamage = 0
-                    
-                } else {
-                    print("2.\(teamP2[1].name)" + " - life : \(teamP2[1].life)" + " - Weapon : \(teamP2[1].weapon.weaponName)")
-                }
-                if teamP2[2].life <= 0 {
-                    print("3.KO")
-                    teamP2[2].weapon.weaponDamage = 0
-                    
-                } else {
-                    print("3.\(teamP2[2].name)" + " - life : \(teamP2[2].life)" + " - Weapon : \(teamP2[2].weapon.weaponName)")
-                }
-                print("Total Team life : \(lifeTeamP2)")
-                choice = input()
-            } while choice != "1" && choice != "2" && choice != "3"
-            
-            switch choice {
-            case "1":
-                attacker = teamP2[0]
-            case "2":
-                attacker = teamP2[1]
-            case "3":
-                attacker = teamP2[2]
-            default:
-                break
-            }
-            print()
-            repeat {
-                actionFighter()
-            }while choice != "1" && choice != "2"
-            
-            if choice == "1" {
-                repeat {
-                    // If the player 2 decides to attack, he chooses a target of the team of the player 1
-                    print("Player 2: Choose the Defender")
-                    if teamP1[0].life <= 0 {
-                        print("1.KO")
-                    } else {
-                        print("1.\(teamP1[0].name)" + " - life : \(teamP1[0].life)")
-                    }
-                    if teamP1[1].life <= 0 {
-                        print("2.KO")
-                    } else {
-                        print("2.\(teamP1[1].name)" + " - life : \(teamP1[1].life)")
-                    }
-                    if teamP1[2].life <= 0 {
-                        print("3.KO")
-                        
-                    } else {
-                        print("3.\(teamP1[2].name)" + " - life : \(teamP1[2].life)")
-                    }
-                    print("Total Team life : \(lifeTeamP1)")
-                    choice = input()
-                    if choice != "1" && choice != "2" && choice != "3" {
-                        fighterNoExist()
-                    }
-                } while choice != "1" && choice != "2" && choice != "3"
-                
-                switch choice {
-                case "1":
-                    defender = teamP1[0]
-                case "2":
-                    defender = teamP1[1]
-                case "3":
-                    defender = teamP1[2]
-                default:
-                    break
-                }
-                if attacker.life <= 0 {
-                    // if attacker is K.O, he can't attack
-                    print("Attacker is KO, no Attack")
-                } else {
-                    // // else the fighter attack
-                    attacker.battle(versus: defender)
-                }
-            } else {
-                // else the player 1 decides to treat
-                attacker.treat(attacker: attacker)
-            }
-            print()
+            lapGame()
         }
-        // end of the laps
-        // Update of life team characters
+        // end of the laps, update of life team characters
         updateLifeTeam()
         if lifeTeamP1 > 0 && lifeTeamP2 > 0 {
             numberOfLaps += 1
