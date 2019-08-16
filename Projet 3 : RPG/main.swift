@@ -7,7 +7,7 @@
 //
 import Foundation
 // initialization of the game, creation of the 2 teams and the variable numbersOfLaps
-let gameParty = Game(choice: "", teamP1: [], teamP2: [], lifeTeamP1: 0, lifeTeamP2: 0, numberOfLaps: 1, player1Lap: true, tourDuJoueur2: false)
+let gameParty = Game(choice: "", teamP1: [], teamP2: [], lifeTeamP1: 0, lifeTeamP2: 0, numberOfLaps: 1, player1Lap: true, player2Lap: false)
 // We ask the players which characters they want to select in their team
 gameParty.selectFighter()
 // Battle Start, players play while one team is K.O

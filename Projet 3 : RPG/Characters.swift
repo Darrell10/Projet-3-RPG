@@ -10,15 +10,15 @@ import Foundation
 class Characters {
     // Attribute
     let name: String
-    let classe: Classe
+    let fighterType: FighterType
     var weapon: Weapon
     var life: Int
     
-    init(name: String, classe: Classe) {
+    init(name: String, fighterType: FighterType) {
         self.name = name
-        self.classe = classe
+        self.fighterType = fighterType
         
-        switch self.classe {
+        switch self.fighterType {
         case .Archer:
             self.weapon = Arrow()
             self.life = 30

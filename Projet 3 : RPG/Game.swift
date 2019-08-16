@@ -36,6 +36,16 @@ func input() -> String {
     return String(strData!)
 }
 
+func changePlayerLap(){
+        player1Lap = !player1Lap
+        player2Lap = !player2Lap
+    }
+    
+func updateLifeTeam() {
+        lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
+        lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
+    }
+
 func fighterChoice() {
     // list of characters to draft
     print("1. Archer - Life point: 30 pts - Weapon: Arrow - Weapon Damage: 8")
@@ -66,7 +76,7 @@ func actionFighter() {
     }
 }
     
-    func draftSelection() {
+func draftSelection() {
         for i in 1...3 {
             if player1Lap == true {
                 print("Player 1: select your fighter number \(i)")
@@ -79,7 +89,7 @@ func actionFighter() {
                 fighterChoice()
             } while choice != "1" && choice != "2" && choice != "3"
             
-            var draft: Classe!
+            var draft: FighterType!
             switch choice {
             case "1":
                 draft = .Archer
@@ -92,49 +102,34 @@ func actionFighter() {
             }
             if player1Lap == true {
             if choice == "1" {
-                let character1 = Characters(name: "Fighter \(i)", classe: draft)
+                let character1 = Characters(name: "Fighter \(i)", fighterType: draft)
                 teamP1.append(character1)
             } else if choice == "2" {
-                let character2 = Characters(name: "Fighter \(i)", classe: draft)
+                let character2 = Characters(name: "Fighter \(i)", fighterType: draft)
                 teamP1.append(character2)
             } else if choice == "3" {
-                let character3 = Characters(name: "Fighter \(i)", classe: draft)
+                let character3 = Characters(name: "Fighter \(i)", fighterType: draft)
                 teamP1.append(character3)
             }
             // The empty print function adds space to the console text
             print()
             } else {
                 if choice == "1" {
-                    let character4 = Characters(name: "Fighter \(i + 3)", classe: draft)
+                    let character4 = Characters(name: "Fighter \(i + 3)", fighterType: draft)
                     teamP2.append(character4)
                 } else if choice == "2" {
-                    let character5 = Characters(name: "Fighter \(i + 3)", classe: draft)
+                    let character5 = Characters(name: "Fighter \(i + 3)", fighterType: draft)
                     teamP2.append(character5)
                 } else if choice == "3" {
-                    let character6 = Characters(name: "Fighter \(i + 3)", classe: draft)
+                    let character6 = Characters(name: "Fighter \(i + 3)", fighterType: draft)
                     teamP2.append(character6)
                 }
                 print()
             }
         }
-        player1Lap = !player1Lap
-        player2Lap = !player2Lap
+        changePlayerLap()
     }
 
-func selectFighter() {
-    // Player 1 Draft Selection
-    draftSelection()
-    // Player 2 Draft Selection
-    draftSelection()
-    // Update team Life
-    updateLifeTeam()
-}
-    
-func updateLifeTeam() {
-        lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
-        lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
-    }
-    
 func lapGame() {
         var attacker: Characters!
         var defender: Characters!
@@ -254,9 +249,17 @@ func lapGame() {
             attacker.treat(attacker: attacker)
         }
         updateLifeTeam()
-        player1Lap = !player1Lap
-        player2Lap = !player2Lap
+        changePlayerLap()
         print()
+    }
+    
+func selectFighter() {
+        // Player 1 Draft Selection
+        draftSelection()
+        // Player 2 Draft Selection
+        draftSelection()
+        // Update team Life
+        updateLifeTeam()
     }
 
 func startGame() {

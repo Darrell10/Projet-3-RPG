@@ -7,7 +7,7 @@
 //
 
 import Foundation
-enum Classe {
+enum FighterType {
     case Archer
     case Warriors
     case Knight
