@@ -132,6 +132,14 @@ func startGame() {
     while lifeTeamP1 > 0 && lifeTeamP2 > 0 {
         var attacker: Characters!
         var defender: Characters!
+        var tourDuJoueur1: Bool = true
+        var tourDuJoueur2: Bool = false
+        var tourAttaquant: [Characters]
+        var tourDefenseur: [Characters]
+        func updateLifeTeam() {
+            lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
+            lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
+        }
         
         // Player 1 Lap
         repeat {
@@ -159,7 +167,7 @@ func startGame() {
             print("Total Team life : \(lifeTeamP1)")
             choice = input()
             if choice != "1" && choice != "2" && choice != "3" {
-                print("this fighter do not exist !")
+                fighterNoExist()
             }
         } while choice != "1" && choice != "2" && choice != "3";
         
@@ -227,6 +235,7 @@ func startGame() {
             // else the player 1 decides to treat
             attacker.treat(attacker: attacker)
         }
+        updateLifeTeam()
         print()
         
         // This condition not allows to play the player 2 if all his characters team are K.O
@@ -326,9 +335,8 @@ func startGame() {
         }
         // end of the laps
         // Update of life team characters
-        lifeTeamP1 = teamP1[0].life + teamP1[1].life + teamP1[2].life
-        lifeTeamP2 = teamP2[0].life + teamP2[1].life + teamP2[2].life
-        if lifeTeamP1 > 0 && lifeTeamP1 > 0 {
+        updateLifeTeam()
+        if lifeTeamP1 > 0 && lifeTeamP2 > 0 {
             numberOfLaps += 1
         }
     }
