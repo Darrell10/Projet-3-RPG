@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B61A33CA22FDF8910032F73C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61A33C922FDF8910032F73C /* Game.swift */; };
+		B6B9368C23128BF800430F5B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B9368B23128BF800430F5B /* Player.swift */; };
 		B6D76D2C22F30A8A00B2B979 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D76D2B22F30A8A00B2B979 /* main.swift */; };
 		B6D76D3322F30AA700B2B979 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D76D3222F30AA700B2B979 /* Weapon.swift */; };
 		B6D76D3522F30AAD00B2B979 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D76D3422F30AAD00B2B979 /* Characters.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		B61A33C922FDF8910032F73C /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		B6B9368B23128BF800430F5B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B6D76D2822F30A8A00B2B979 /* Projet 3 : RPG */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Projet 3 : RPG"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D76D2B22F30A8A00B2B979 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B6D76D3222F30AA700B2B979 /* Weapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				B6D76D3C22F30AC200B2B979 /* FighterType.swift */,
 				B61A33C922FDF8910032F73C /* Game.swift */,
 				B6D76D2B22F30A8A00B2B979 /* main.swift */,
+				B6B9368B23128BF800430F5B /* Player.swift */,
 			);
 			path = "Projet 3 : RPG";
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				B6D76D3D22F30AC200B2B979 /* FighterType.swift in Sources */,
 				B6D76D3922F30AB800B2B979 /* Arrow.swift in Sources */,
 				B6D76D3322F30AA700B2B979 /* Weapon.swift in Sources */,
+				B6B9368C23128BF800430F5B /* Player.swift in Sources */,
 				B61A33CA22FDF8910032F73C /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
