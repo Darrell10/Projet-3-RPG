@@ -9,7 +9,7 @@
 import Foundation
 class Characters {
     // Attribute
-    let name: String
+    var name: String
     let fighterType: FighterType
     var weapon: Weapon
     var life: Int
@@ -20,13 +20,13 @@ class Characters {
         
         switch self.fighterType {
         case .Archer:
-            self.weapon = Arrow()
+            self.weapon = Weapon(weaponName: "Arrow", weaponDamage: 8)
             self.life = 30
         case .Warriors:
-            self.weapon = Axe()
+            self.weapon = Weapon(weaponName: "Axe", weaponDamage: 15)
             self.life = 20
         case .Knight:
-            self.weapon = Sword()
+            self.weapon = Weapon(weaponName: "Sword", weaponDamage: 10)
             self.life = 25
         }
     }
@@ -37,33 +37,11 @@ class Characters {
     }
     
     func attack(defender: Characters) {
-        // Generation of a random number between 0 and 9
-        let number = Int(arc4random_uniform(9))
-        // If the generated number is less than or equal to 2, appearance of the magic chest
-        if number <= 2 {
-            // Random selection of the new weapon
-            let weaponNumber = Int(arc4random_uniform(2)+1)
-            if weaponNumber == 1 {
-                self.weapon = Sword ()
-            } else if weaponNumber == 2 {
-                self.weapon = Arrow ()
-            } else if weaponNumber == 3 {
-                self.weapon = Axe()
-            }
-            print("Appearance of a magic chest")
-            print("New weapon get: \(self.weapon.weaponName)")
-            print()
-        }
         // Defender received damaged
-        defender.receveidDamage(weaponDamage: weapon.weaponDamage)
-    }
-    
-    func receveidDamage(weaponDamage: Int) {
-        // Reception of damages following an attack
-        life = life - weaponDamage
-        if life < 0 {
-        // If the character has negative life points, the points remain at zero
-            life = 0
+        defender.life = defender.life - weapon.weaponDamage
+        if defender.life < 0 {
+            // If the character has negative life points, the points remain at zero
+            defender.life = 0
         }
     }
     

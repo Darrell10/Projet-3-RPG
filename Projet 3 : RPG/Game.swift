@@ -8,15 +8,12 @@
 import Foundation
 class Game {
     // Attribut
-    var choice: String?
+    var gameChoice: String?
     var numberOfLaps: Int
-    var player1 =  Player(teamPlayer: [], lifeTeamPlayer: 0)
-    var player2 = Player(teamPlayer: [], lifeTeamPlayer: 0)
     var player1Lap: Bool
     var player2Lap: Bool
 
-    init(choice: String?, numberOfLaps: Int, player1Lap: Bool, player2Lap: Bool){
-        self.choice = choice
+    init(numberOfLaps: Int, player1Lap: Bool, player2Lap: Bool){
         self.numberOfLaps = numberOfLaps
         self.player1Lap = player1Lap
         self.player2Lap = player2Lap
@@ -29,34 +26,51 @@ class Game {
     return String(strData!)
     }
     
+    func actionFighter() {
+        // Message that displays the possible actions to execute
+        print("what do you want to do ?")
+        print("1. Attack")
+        print("2. Treat")
+        gameChoice = input()
+        print()
+        if gameChoice != "1" && gameChoice != "2" {
+            // Alert message when player select a wrong action
+            print("this action do not exist !")
+        }
+    }
+    
     func changePlayerLap(){
     // Function who reverse player lap round
         player1Lap = !player1Lap
         player2Lap = !player2Lap
     }
     
-    
-    
-    func actionFighter() {
-    // Message that displays the possible actions to execute
-    print("what do you want to do ?")
-    print("1. Attack")
-    print("2. Treat")
-    choice = input()
-    print()
-    if choice != "1" && choice != "2" {
-        // Alert message when player select a wrong action
-        print("this action do not exist !")
-        }
-    }
-    
-    
-    
     func lapGame() {
         var attacker: Characters!
         var defender: Characters!
         var attackerLap: [Characters]
         var defenderLap: [Characters]
+        //var choice : String?
+        
+        func magicChest() {
+            // Generation of a random number between 0 and 9
+            let number = Int(arc4random_uniform(9))
+            // If the generated number is less than or equal to 2, appearance of the magic chest
+            if number <= 2 {
+                // Random selection of the new weapon
+                let weaponNumber = Int(arc4random_uniform(2)+1)
+                if weaponNumber == 1 {
+                    attacker.weapon = Weapon(weaponName: "Tongfar", weaponDamage: 12)
+                } else if weaponNumber == 2 {
+                    attacker.weapon = Weapon(weaponName: "Triple Rod", weaponDamage: 15)
+                } else if weaponNumber == 3 {
+                    attacker.weapon = Weapon(weaponName: "Sceptre", weaponDamage: 10)
+                }
+                print("Appearance of a magic chest")
+                print("New weapon get: \(attacker.weapon.weaponName)")
+                print()
+            }
+        }
         
         repeat {
             if player1Lap == true {
@@ -97,14 +111,18 @@ class Game {
                 print("3.\(attackerLap[2].name)" + " - life : \(attackerLap[2].life)" + " - Weapon : \(attackerLap[2].weapon.weaponName)")
             }
             
-            choice = input()
-            if choice != "1" && choice != "2" && choice != "3" {
-                fighterNoExist()
+            gameChoice = input()
+            if gameChoice != "1" && gameChoice != "2" && gameChoice != "3" {
+                if player1Lap == true {
+                    player1.fighterNoExist()
+                } else {
+                    player2.fighterNoExist()
+                }
             }
             
-        } while choice != "1" && choice != "2" && choice != "3";
+        } while gameChoice != "1" && gameChoice != "2" && gameChoice != "3";
         
-        switch choice {
+        switch gameChoice {
         case "1":
             attacker = attackerLap[0]
         case "2":
@@ -118,11 +136,15 @@ class Game {
         print()
         // Player decides what to do
         repeat {
-            actionFighter()
-        } while choice != "1" && choice != "2"
-        
+            if player1Lap == true {
+                actionFighter()
+            }
+            else {
+                actionFighter()
+            }
+        } while gameChoice != "1" && gameChoice != "2"
         // If the player decides to attack, he chooses a target of the opponent team
-        if choice == "1" {
+        if gameChoice == "1" {
             repeat {
                 if player1Lap == true {
                     print("Player 1: Choose the defender !")
@@ -150,13 +172,17 @@ class Game {
                 }
                 
                 // print("Total Team life : \(lifeTeamP2)")
-                choice = input()
-                if choice != "1" && choice != "2" && choice != "3" {
-                    fighterNoExist()
+                gameChoice = gameParty.input()
+                if gameChoice != "1" && gameChoice != "2" && gameChoice != "3" {
+                    if player1Lap == true {
+                        player1.fighterNoExist()
+                    } else {
+                        player2.fighterNoExist()
+                    }
                 }
-            } while choice != "1" && choice != "2" && choice != "3"
+            } while gameChoice != "1" && gameChoice != "2" && gameChoice != "3"
             
-            switch choice {
+            switch gameChoice {
             case "1":
                 defender = defenderLap[0]
             case "2":
@@ -173,6 +199,7 @@ class Game {
                 print("Attacker is KO, no Attack")
             } else {
                 // else the fighter attack
+                magicChest()
                 attacker.battle(versus: defender)
             }
             
@@ -180,19 +207,19 @@ class Game {
             // else the player 1 decides to treat
             attacker.treat(attacker: attacker)
         }
-        
         player1.updateLifeTeam()
         player2.updateLifeTeam()
         changePlayerLap()
         print()
-        
     }
     
     func selectFighter() {
         // Player 1 Draft Selection
         player1.draftSelection()
+        changePlayerLap()
         // Player 2 Draft Selection
         player2.draftSelection()
+        changePlayerLap()
         // Update team Life
         player1.updateLifeTeam()
         player2.updateLifeTeam()
@@ -212,7 +239,6 @@ class Game {
             if player1.lifeTeamPlayer > 0 && player2.lifeTeamPlayer > 0 {
                 numberOfLaps += 1
             }
-            
         }
     }
     
@@ -220,10 +246,10 @@ class Game {
         // The winner is
         let winner: String
         if player1.lifeTeamPlayer > 0 {
-            winner = "Player 1"
+            winner = player1.playerName
             
         } else {
-            winner = "Player 2"
+            winner = player2.playerName
         }
         // Winner is printing
         print("the Winner is " + winner + " !")

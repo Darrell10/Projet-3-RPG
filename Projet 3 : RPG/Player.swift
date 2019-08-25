@@ -9,12 +9,15 @@
 import Foundation
 
 class Player {
+    var playerName: String
     var teamPlayer: [Characters]
     var lifeTeamPlayer: Int
+    var choice: String?
     
-    init(teamPlayer: [Characters], lifeTeamPlayer: Int){
+    init(playerName: String, teamPlayer: [Characters], lifeTeamPlayer: Int){
         self.teamPlayer = teamPlayer
         self.lifeTeamPlayer = lifeTeamPlayer
+        self.playerName = playerName
     }
     
     func updateLifeTeam() {
@@ -27,11 +30,16 @@ class Player {
         print("1. Archer - Life point: 30 pts - Weapon: Arrow - Weapon Damage: 8")
         print("2. Warrior - Life point: 20 pts - Weapon: Axe - Weapon Damage: 15")
         print("3. Knight - Life point: 25 pts - Weapon: Sword - Weapon Damage: 10")
-        choice = input()
+        choice = gameParty.input()
         // if choice is different of the charactere selection
         if choice != "1" && choice != "2" && choice != "3" {
             fighterNoExist()
         }
+    }
+    
+    func renameFighter() {
+        print("Give a name to your fighter")
+        choice = gameParty.input()
     }
     
     func fighterNoExist() {
@@ -42,7 +50,7 @@ class Player {
     func draftSelection() {
         // Draft player selection
         for i in 1...3 {
-            if Game.player1Lap == true {
+            if gameParty.player1Lap == true {
                 print("Player 1: select your fighter number \(i)")
             }
             else {
@@ -64,37 +72,47 @@ class Player {
             default:
                 break
             }
-            if player1Lap == true {
+            if gameParty.player1Lap == true {
                 if choice == "1" {
+                    renameFighter()
                     let character1 = Characters(name: "Fighter \(i)", fighterType: draft)
+                    character1.name = choice!
                     teamPlayer.append(character1)
                     
                 } else if choice == "2" {
+                    renameFighter()
                     let character2 = Characters(name: "Fighter \(i)", fighterType: draft)
+                    character2.name = choice!
                     teamPlayer.append(character2)
                     
                 } else if choice == "3" {
+                    renameFighter()
                     let character3 = Characters(name: "Fighter \(i)", fighterType: draft)
+                    character3.name = choice!
                     teamPlayer.append(character3)
-                    
                 }
                 // The empty print function adds space to the console text
                 print()
                 
             } else {
                 if choice == "1" {
+                    renameFighter()
                     let character4 = Characters(name: "Fighter \(i + 3)", fighterType: draft)
-                    teamP2.append(character4)
+                    character4.name = choice!
+                    teamPlayer.append(character4)
                 } else if choice == "2" {
+                    renameFighter()
                     let character5 = Characters(name: "Fighter \(i + 3)", fighterType: draft)
-                    teamP2.append(character5)
+                    character5.name = choice!
+                    teamPlayer.append(character5)
                 } else if choice == "3" {
+                    renameFighter()
                     let character6 = Characters(name: "Fighter \(i + 3)", fighterType: draft)
-                    teamP2.append(character6)
+                    character6.name = choice!
+                    teamPlayer.append(character6)
                 }
                 print()
             }
         }
-        changePlayerLap()
     }
 }
