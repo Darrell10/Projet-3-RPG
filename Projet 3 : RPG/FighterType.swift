@@ -11,6 +11,7 @@ enum FighterType {
     case Archer
     case Warriors
     case Knight
+    case Magician
 }
 
 

@@ -10,6 +10,8 @@ import Foundation
 let player1 = Player(playerName: "Player 1", teamPlayer: [], lifeTeamPlayer: 0)
 let player2 = Player(playerName: "Player 2", teamPlayer: [], lifeTeamPlayer: 0)
 let gameParty = Game(numberOfLaps: 1, player1Lap: true, player2Lap: false)
+var fighterNameList: [String] = []
+var nameOfPlayer = String()
 // We ask the players which characters they want to select in their team
 gameParty.selectFighter()
 // Battle Start, players play while one team is K.O

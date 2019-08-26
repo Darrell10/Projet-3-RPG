@@ -6,6 +6,7 @@
 //  Copyright © 2019 French game factory. All rights reserved.
 //
 import Foundation
+
 class Game {
     // Attribut
     var gameChoice: String?
@@ -205,7 +206,13 @@ class Game {
             
         } else {
             // else the player 1 decides to treat
-            attacker.treat(attacker: attacker)
+            if attacker.fighterType == .Magician {
+                print("I can treat")
+                attacker.treat(attacker: Magician)
+            } else {
+                print("Only Magician can treat")
+                actionFighter()
+            }
         }
         player1.updateLifeTeam()
         player2.updateLifeTeam()
