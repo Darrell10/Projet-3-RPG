@@ -47,8 +47,9 @@ class Game {
     }
     
     func lapGame() {
-        var attacker: Characters!
-        var defender: Characters!
+        var attacker: Characters
+        var defender: Characters
+        //var healer: Magician
         var attackerLap: [Characters]
         var defenderLap: [Characters]
         //var choice : String?
@@ -72,7 +73,10 @@ class Game {
                 print()
             }
         }
-        
+        attackerLap = player1.teamPlayer
+        defenderLap = player2.teamPlayer
+        attacker = attackerLap[0]
+        defender = defenderLap[0]
         repeat {
             if player1Lap == true {
                 attackerLap = player1.teamPlayer
@@ -206,14 +210,55 @@ class Game {
             
         } else {
             // else the player 1 decides to treat
-            if attacker.fighterType == .Magician {
-                print("I can treat")
-                attacker.treat(attacker: Magician)
-            } else {
-                print("Only Magician can treat")
-                actionFighter()
+                repeat {
+                    if player1Lap == true {
+                        print("Player 1: Choose who treat !")
+                    }
+                    else {
+                        print("Player 2: Choose who treat !")
+                    }
+                    
+                    if attackerLap[0].life <= 0 {
+                        print("1.KO")
+                    } else {
+                        print("1.\(attackerLap[0].name)" + " - life : \(attackerLap[0].life)")
+                    }
+                    
+                    if attackerLap[1].life <= 0 {
+                        print("2.KO")
+                    } else {
+                        print("2.\(attackerLap[1].name)" + " - life : \(attackerLap[1].life)")
+                    }
+                    
+                    if attackerLap[2].life <= 0 {
+                        print("3.KO")
+                    } else {
+                        print("3.\(attackerLap[2].name)" + " - life : \(attackerLap[2].life)")
+                    }
+                    
+                    // print("Total Team life : \(lifeTeamP2)")
+                    gameChoice = gameParty.input()
+                    if gameChoice != "1" && gameChoice != "2" && gameChoice != "3" {
+                        if player1Lap == true {
+                            player1.fighterNoExist()
+                        } else {
+                            player2.fighterNoExist()
+                        }
+                    }
+                } while gameChoice != "1" && gameChoice != "2" && gameChoice != "3"
+                
+                switch gameChoice {
+                case "1":
+                    attacker = attackerLap[0]
+                case "2":
+                    attacker = attackerLap[1]
+                case "3":
+                    attacker = attackerLap[2]
+                default:
+                    break
+                }
+                attacker.treat(attacker: attacker)
             }
-        }
         player1.updateLifeTeam()
         player2.updateLifeTeam()
         changePlayerLap()

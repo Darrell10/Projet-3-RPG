@@ -56,7 +56,15 @@ class Characters {
     }
     
     func treat (attacker: Characters) {
-        print("only Magician can treat")
+        // if attacker is K.O, he can't treat
+        if attacker.life <= 0 {
+            print("Fighter is KO, no recovery point")
+        } else {
+            // else he recovery 5 life points
+            attacker.life += 5
+            print("life + 5pts  - life points is now: \(attacker.life)")
+        }
+        print()
     }
     
 }

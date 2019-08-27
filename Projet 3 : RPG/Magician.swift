@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Magician: Characters {
+/*class Magician: Characters {
     init() {
         super.init(name: "", fighterType: .Magician)
     }
@@ -33,17 +33,5 @@ class Magician: Characters {
         
     }
     
-    override func treat (attacker: Characters) {
-        super.treat(attacker: attacker)
-        // if attacker is K.O, he can't treat
-        if attacker.life <= 0 {
-            print("Fighter is KO, no recovery point")
-        } else {
-            // else he recovery 5 life points
-            attacker.life += 5
-            print("life + 5pts  - life points is now: \(attacker.life)")
-        }
-        print()
-    }
-}
+}*/
 
