@@ -10,11 +10,11 @@ import Foundation
 
 class Player {
     var playerName: String
-    var teamPlayer: [Characters]
+    var teamPlayer: [Character]
     var lifeTeamPlayer: Int
     var choice: String?
     
-    init(playerName: String, teamPlayer: [Characters], lifeTeamPlayer: Int){
+    init(playerName: String, teamPlayer: [Character], lifeTeamPlayer: Int){
         self.teamPlayer = teamPlayer
         self.lifeTeamPlayer = lifeTeamPlayer
         self.playerName = playerName
@@ -90,22 +90,22 @@ class Player {
             if gameParty.player1Lap == true {
                 if choice == "1" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                     
                 } else if choice == "2" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                     
                 } else if choice == "3" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                 }
                 else if choice == "4" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                 }
                 // The empty print function adds space to the console text
@@ -114,19 +114,19 @@ class Player {
             } else {
                 if choice == "1" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                 } else if choice == "2" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                 } else if choice == "3" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                 } else if choice == "4" {
                     renameFighter()
-                    let character = Characters(name: "\(nameOfPlayer)", fighterType: draft)
+                    let character = Character(name: "\(nameOfPlayer)", fighterType: draft)
                     teamPlayer.append(character)
                 }
                 print()

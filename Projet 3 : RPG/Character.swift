@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Characters {
+class Character {
     // Attribute
     var name: String
     let fighterType: FighterType
@@ -34,12 +34,12 @@ class Characters {
         }
     }
     // Method
-    func battle(versus character: Characters) {
+    func battle(versus character: Character) {
         attack(defender: character)
         desc()
     }
     
-    func attack(defender: Characters) {
+    func attack(defender: Character) {
         // Defender received damaged
         defender.life = defender.life - weapon.weaponDamage
         if defender.life < 0 {
@@ -55,7 +55,7 @@ class Characters {
         
     }
     
-    func treat (attacker: Characters) {
+    func treat (attacker: Character) {
         // if attacker is K.O, he can't treat
         if attacker.life <= 0 {
             print("Fighter is KO, no recovery point")

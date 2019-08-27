@@ -23,8 +23,11 @@ class Game {
 // Methods
     func input() -> String {
     // Function that will be used to determine the players' choices
-    let strData = readLine()
-    return String(strData!)
+        if let strData = readLine(){
+            return String(strData)
+        } else {
+            return String("Error")
+        }
     }
     
     func actionFighter() {
@@ -47,11 +50,11 @@ class Game {
     }
     
     func lapGame() {
-        var attacker: Characters
-        var defender: Characters
+        var attacker: Character
+        var defender: Character
         //var healer: Magician
-        var attackerLap: [Characters]
-        var defenderLap: [Characters]
+        var attackerLap: [Character]
+        var defenderLap: [Character]
         //var choice : String?
         
         func magicChest() {
